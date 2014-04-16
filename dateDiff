@@ -1,0 +1,18 @@
+
+
+dateDiff () {
+
+   ## expects the 2 times we want to compare
+   ## attempts to figure out the Seconds difference
+   ## between these two dates
+   
+   unset TIME_DIFF
+   dte1=`date --utc --date "$1" +%s`
+   dte2=`date --utc --date "$2" +%s`
+   diffSec=$((dte2-dte1))
+   if ((diffSec < 0)); then abs=-1; else abs=1; fi
+   TIME_DIFF=$((diffSec/1*abs))
+   echo "$TIME_DIFF"
+
+}
+
