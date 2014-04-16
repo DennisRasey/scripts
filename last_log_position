@@ -1,0 +1,29 @@
+
+last_log_position () {
+
+   WATCH_LOG="$1" ; NUMLINES_FILE="$2" ; NUMLINES_DIFF=0
+
+   ## find total number of lines in the log file
+   CUR_LINE_COUNT=`wc -l $WATCH_LOG | awk '{print $1}'`
+
+   ## retrieve the previous line count of the log file
+   ## if there isn't one, make a new one with the current line count
+   if [ -r "$NUMLINES_FILE" ]; then
+      OLD_LINE_COUNT=`cat "$NUMLINES_FILE"`
+   else
+      echo "$CUR_LINE_COUNT" > "$NUMLINES_FILE"
+      OLD_LINE_COUNT=`cat "$NUMLINES_FILE"`
+   fi
+
+   echo "$CUR_LINE_COUNT" > "$NUMLINES_FILE"  ## save new line count
+
+   if [ "$OLD_LINE_COUNT" -lt "$CUR_LINE_COUNT" ]; then
+     NUMLINES_DIFF=$(($CUR_LINE_COUNT - $OLD_LINE_COUNT))
+   elif [ "$OLD_LINE_COUNT" -eq "$CUR_LINE_COUNT" ]; then
+     NUMLINES_DIFF=0  # log same size
+   else
+     NUMLINES_DIFF="$CUR_LINE_COUNT"  ## log rolled?
+     echo "$MY_DATE - log rolled?" >> "$MY_LOG"
+   fi
+
+}
