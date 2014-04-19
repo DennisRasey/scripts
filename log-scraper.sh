@@ -7,11 +7,11 @@ WATCH_LOG="/tmp/log-scraper/tmp/server.log"
 SEARCH_PATTERN="OutOfMemoryError"
 
 ## brief "description" of the app
-APP_NAME="ovdw"
+APP_NAME="my_app"
 
 ## Where to send alerts
-EMAIL_LIST="ssg-qdc@qualcomm.com"
-PAGER_LIST="ssg-qdc.page@qualcomm.com"
+EMAIL_LIST="me@example.com"
+PAGER_LIST="me.page@example.com"
 
 MY_DATE=`date +%F" "%T`
 WORK_DIR=$(dirname $(readlink -f $0))
@@ -72,7 +72,7 @@ alerter () {
    APP_LOG=`echo $1 | awk -F "/" '{print $6}'`
 
    ## define page format/syntax
-   ## 2008-04-19 18:45:19 - search pattern 'dennis' found on stewie
+   ## 2008-04-19 18:45:19 - search pattern 'dennis' found on HOSTNAMR
    ALERT_MSG_SUBJECT="$MY_DATE - search pattern: '$SEARCH_PATTERN' found on $HOSTNAME"
    ALERT_MSG_BODY="$MY_DATE - search pattern: '$SEARCH_PATTERN' found on $HOSTNAME for $APP_LOG"
 
@@ -93,5 +93,3 @@ fi
 rm -f "$LOCK_FILE" ; trap - INT TERM EXIT
 
 exit 0
-
- 
