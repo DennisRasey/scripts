@@ -16,15 +16,6 @@ LOG_FILE="$WORK_DIR/log-roller.log"
 
 MY_DATE=`date +%F" "%T`
 
-## ensure only one instance is running
-LOCK_FILE="$WORK_DIR/`basename "$0" .sh`.lck"
-if [ ! -e "$LOCK_FILE" ]; then
-  trap "rm -f $LOCK_FILE ; exit" INT TERM EXIT ; touch "$LOCK_FILE"
-else
-  echo "$MY_DATE - already running" >> "$MY_LOG" ; exit 1
-fi
-
-
 cd "$LOG_DIR"
 
 ## find all wrapper.log files & empty them
@@ -48,6 +39,5 @@ find . -type f -name "*.log.*" -not -name "*.gz" -mtime +$COMPRESS_AGE -exec gzi
 
 echo "Done." >> "$LOG_FILE" ; echo >> "$LOG_FILE"
 
-rm -f "$LOCK_FILE" ; trap - INT TERM EXIT
 
 exit 0
