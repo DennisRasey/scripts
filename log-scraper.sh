@@ -72,7 +72,7 @@ alerter () {
    APP_LOG=`echo $1 | awk -F "/" '{print $6}'`
 
    ## define page format/syntax
-   ## 2008-04-19 18:45:19 - search pattern 'dennis' found on HOSTNAMR
+   ## 2008-04-19 18:45:19 - search pattern 'dennis' found on HOSTNAME
    ALERT_MSG_SUBJECT="$MY_DATE - search pattern: '$SEARCH_PATTERN' found on $HOSTNAME"
    ALERT_MSG_BODY="$MY_DATE - search pattern: '$SEARCH_PATTERN' found on $HOSTNAME for $APP_LOG"
 

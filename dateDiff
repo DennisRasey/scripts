@@ -15,4 +15,3 @@ dateDiff () {
    echo "$TIME_DIFF"
 
 }
-
