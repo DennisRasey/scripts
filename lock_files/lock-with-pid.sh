@@ -1,7 +1,7 @@
 
 WORK_DIR=$(dirname $(readlink -f $0))
 
-MY_LOG=$WORK_DIR/rpplinkmon.log
+MY_LOG=$WORK_DIR/somelog.log
 
 ## ensure only one instance is running
 LOCK_FILE="$WORK_DIR/`basename "$0" .sh`.lck"
